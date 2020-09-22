@@ -1,5 +1,7 @@
 import React from "react";
-import hostgatorLogo from "./hostgator-logo.svg";
+import hostgatorLogo from "./imgs/hostgator-logo.svg";
+import guyImg from "./imgs/guy-img.svg";
+import deskImg from "./imgs/desk-img.svg";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import CheckIcon from "@material-ui/icons/Check";
@@ -7,10 +9,14 @@ import IconButton from "@material-ui/core/IconButton";
 import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
 import { makeStyles } from "@material-ui/core/styles";
 import "./App.css";
+import PlansView from "./components/PlansView/PlansView";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
+    scrollBehavior: "smooth",
+    width: "100%",
+    overflow: "hidden",
   },
   menuButton: {
     marginRight: theme.spacing(2),
@@ -44,29 +50,78 @@ function App() {
           </div>
         </Toolbar>
       </AppBar>
-      <div className={classes.content}>
-        <h5>Hospedagem de sites</h5>
-        <h3>
-          Tenha uma hospedagem de sites estável e evite perder visitantes
-          diariamente
-        </h3>
-        <h5>
-          <CheckIcon></CheckIcon>99,9% de disponibilidade: seu site sempre no ar
-        </h5>
-        <h5>
-          <CheckIcon></CheckIcon>Suporte 24h, todos os dias
-        </h5>
-        <h5>
-          <CheckIcon></CheckIcon>Painel de Controle cPanel
-        </h5>
-        <IconButton
-          aria-label="down"
-          className={classes.arrowDown}
-          size="small"
-        >
-          <ArrowDropDownIcon fontSize="inherit" />
-        </IconButton>
+      <div className="content">
+        <div className="bannerImg">
+          <img className="deskImg" src={deskImg} alt="logo" />
+        </div>
+        <div className="title">
+          <span>Hospedagem de sites</span>
+        </div>
+        <div>
+          <span className="description">
+            Tenha uma hospedagem de sites estável e <br /> evite perder
+            visitantes diariamente
+          </span>
+        </div>
+        <div className="item">
+          <CheckIcon
+            style={{
+              fontSize: 16,
+              position: "relative",
+              top: 4,
+              color: "#ffffff",
+              fontWeight: "bold",
+            }}
+          ></CheckIcon>
+          <span>99,9% de disponibilidade: seu site sempre no ar</span>
+        </div>
+        <div className="item">
+          <span>
+            <CheckIcon
+              style={{
+                fontSize: 16,
+                position: "relative",
+                top: 4,
+                color: "#ffffff",
+                fontWeight: "bold",
+              }}
+            ></CheckIcon>
+            <span>Suporte 24h, todos os dias</span>
+          </span>
+          <span>
+            <CheckIcon
+              style={{
+                fontSize: 16,
+                position: "relative",
+                top: 4,
+                color: "#ffffff",
+                fontWeight: "bold",
+              }}
+            ></CheckIcon>
+            <span>Painel de Controle cPanel</span>
+          </span>
+        </div>
+        <div className="bannerImg">
+          <img className="guyImg" src={guyImg} alt="logo" />
+        </div>
+
+        <div className="arrow-down">
+          <IconButton
+            aria-label="down"
+            disableRipple={true}
+            className={classes.arrowDown}
+            size="medium"
+            style={{ backgroundColor: "transparent" }}
+            href="#pay"
+          >
+            <ArrowDropDownIcon
+              fontSize="inherit"
+              style={{ backgroundColor: "4480C5", borderRadius: 26 }}
+            />
+          </IconButton>
+        </div>
       </div>
+      <PlansView />
     </div>
   );
 }

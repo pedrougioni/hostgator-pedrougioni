@@ -1,0 +1,65 @@
+.planCard {
+  width: 331px;
+  height: 650px;
+  background: #ffffff 0% 0% no-repeat padding-box;
+  border: 1px solid #dfecff;
+  border-radius: 4px;
+  text-align: center;
+  opacity: 1;
+}
+
+.planTitle {
+  margin-top: 10px;
+  text-align: center;
+  font: normal normal bold 26px/26px Montserrat;
+  letter-spacing: 0px;
+  color: #1d5297;
+  opacity: 1;
+}
+
+.cardHeader {
+  height: 135px;
+  border-bottom: 1px solid #dfecff;
+}
+
+.cardHeader img {
+  margin-top: 33px;
+  left: 0%;
+  right: 0%;
+}
+
+.pricesCard {
+  margin-top: 30px;
+}
+
+.totalPrice {
+  text-decoration: line-through;
+  font: normal normal normal 13px/19px Montserrat;
+  letter-spacing: 0px;
+  color: #333333;
+}
+
+.salePrice {
+  font: normal normal bold 13px/19px Montserrat;
+  letter-spacing: 0px;
+  color: #333333;
+  margin-left: 3px;
+}
+
+.equivalentLabel {
+  font: normal normal normal 13px/19px Montserrat;
+  letter-spacing: 0px;
+  color: #333333;
+}
+
+.priceByPeriodLabel {
+  font: normal normal normal 20px/24px Montserrat;
+  letter-spacing: 0px;
+  color: #1d5297;
+}
+
+.priceByPeriodNumber {
+  font: normal normal bold 35px/24px Montserrat;
+  letter-spacing: 0px;
+  color: #1d5297;
+}

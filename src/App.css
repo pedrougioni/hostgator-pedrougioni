@@ -1,0 +1,102 @@
+.content {
+  background-color: #1d5297;
+  height: 300px;
+  text-align: center;
+  padding-top: 94px;
+  position: relative;
+}
+
+.content::after {
+  content: "";
+  position: absolute;
+  margin-left: 50%;
+  bottom: -31px;
+  left: 0;
+  width: 2995px;
+  height: 32px;
+  background-color: #fff;
+  background-image: url(/bg-wave.svg);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+  -webkit-transform: translateX(-57%);
+  -ms-transform: translateX(-57%);
+  transform: translateX(-57%);
+  z-index: -3;
+}
+
+.title {
+  font: normal normal 600 16px/27px Montserrat;
+  letter-spacing: 1.6px;
+  color: #b9d0ef;
+  opacity: 1;
+}
+.description {
+  font: normal normal bold 30px/45px Montserrat;
+  letter-spacing: 0px;
+  color: #ffffff;
+  opacity: 1;
+  margin-top: 12px;
+}
+.item {
+  font: normal normal normal 16px/22px Montserrat;
+  letter-spacing: 0px;
+  color: #b9d0ef;
+  opacity: 1;
+  margin-top: 33px;
+}
+
+.item span span {
+  margin-left: 2px;
+}
+
+.item span {
+  margin-left: 5px;
+}
+
+.arrow-down {
+  position: absolute;
+  bottom: -53px;
+  left: calc(50% - 25px);
+  -webkit-animation: bounce 3s infinite;
+  animation: bounce 3s infinite;
+  z-index: 2;
+}
+
+@keyframes bounce {
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+  40% {
+    -webkit-transform: translateY(-6px);
+    transform: translateY(-6px);
+  }
+  60% {
+    -webkit-transform: translateY(-3px);
+    transform: translateY(-3px);
+  }
+}
+
+.bannerImg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0px;
+  left: 0px;
+}
+
+.deskImg {
+  position: absolute;
+  bottom: -52px;
+  left: 3%;
+}
+
+.guyImg {
+  position: absolute;
+  bottom: -52px;
+  right: 3%;
+}
