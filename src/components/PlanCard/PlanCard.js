@@ -7,6 +7,7 @@ import info from "./i.svg";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import Chip from "@material-ui/core/Chip";
+import AnimatedNumber from "animated-number-react";
 
 const useStyles = makeStyles((theme) => ({
   buyNow: {
@@ -31,6 +32,10 @@ function PlanCard(props) {
     planTurbo: <img src={planTurbo} alt="planTurbo" />,
   };
 
+  function formatValue(value) {
+    return value.toFixed(2).toLocaleString("pt-BR");
+  }
+
   const buyNowStyle = {};
   let planCardClass = "planCard";
   if (plan.recomended) {
@@ -49,9 +54,21 @@ function PlanCard(props) {
       </div>
       <div className="pricesCard">
         <div>
-          <span className="totalPrice">R$ {priceOrder.toLocaleString()}</span>
+          <span className="totalPrice">
+            R${" "}
+            <AnimatedNumber
+              duration={500}
+              value={priceOrder}
+              formatValue={formatValue}
+            />
+          </span>
           <span className="salePrice">
-            R$ {priceWithDiscount.toLocaleString()}
+            R${" "}
+            <AnimatedNumber
+              duration={500}
+              value={priceWithDiscount}
+              formatValue={formatValue}
+            />
           </span>
         </div>
         <div>
@@ -61,7 +78,11 @@ function PlanCard(props) {
           <span className="priceByPeriodLabel">
             R${" "}
             <span className="priceByPeriodNumber">
-              {pricePerMonth.toLocaleString()}
+              <AnimatedNumber
+                duration={500}
+                value={pricePerMonth}
+                formatValue={formatValue}
+              />
             </span>
             /mês*
           </span>
@@ -88,7 +109,12 @@ function PlanCard(props) {
             1 ano de Domínio Grátis <img src={info} alt="info" />
           </div>
           <div className="economyValue">
-            economize R$ {saving.toLocaleString()}
+            economize R${" "}
+            <AnimatedNumber
+              value={saving}
+              duration={500}
+              formatValue={formatValue}
+            />
             <Chip
               label="40% OFF"
               style={{
