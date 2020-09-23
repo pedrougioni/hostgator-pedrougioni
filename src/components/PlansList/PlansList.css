@@ -1,0 +1,25 @@
+.carouselButton {
+  background-color: hsl(214, 68%, 35%);
+  color: #ffffff;
+  position: absolute;
+  bottom: 50%;
+  border-radius: 26px;
+}
+
+.carouselButton.left {
+  left: -25px;
+}
+.carouselButton.right {
+  right: -25px;
+}
+
+.carouselContainer {
+  position: relative;
+}
+
+.plansListDefault {
+  width: 1026px;
+  display: flex;
+  flex: 1;
+  margin: 0 auto;
+}

@@ -1,8 +1,12 @@
 import React from "react";
 import "./PlanCard.css";
 import planP from "./planP.svg";
+import planM from "./planM.svg";
+import planTurbo from "./planTurbo.svg";
+import info from "./i.svg";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
+import Chip from "@material-ui/core/Chip";
 
 const useStyles = makeStyles((theme) => ({
   buyNow: {
@@ -20,25 +24,46 @@ const useStyles = makeStyles((theme) => ({
 
 function PlanCard(props) {
   const classes = useStyles();
-  const plan = props.plan;
-  console.log(plan);
+  const { paymentFrequency, plan } = props;
+  const imgs = {
+    planP: <img src={planP} alt="planP" />,
+    planM: <img src={planM} alt="planM" />,
+    planTurbo: <img src={planTurbo} alt="planTurbo" />,
+  };
+
+  const buyNowStyle = {};
+  let planCardClass = "planCard";
+  if (plan.recomended) {
+    buyNowStyle.backgroundColor = "#FF6A17";
+    planCardClass += " recomended";
+  }
+  const { priceOrder, months } = plan.cycle[paymentFrequency];
+  const priceWithDiscount = Math.round(priceOrder * 0.6 * 100) / 100;
+  const pricePerMonth = Math.round((priceWithDiscount * 100) / months) / 100;
+  const saving = Math.round((priceOrder - priceWithDiscount) * 100) / 100;
   return (
-    <div className="planCard">
+    <div className={planCardClass}>
       <div className="cardHeader">
-        <img src={planP} alt="planP" />
+        {imgs[plan.img]}
         <div className="planTitle">{plan.name}</div>
       </div>
       <div className="pricesCard">
         <div>
-          <span className="totalPrice">R$ 431,64</span>
-          <span className="salePrice">R$ 302,15</span>
+          <span className="totalPrice">R$ {priceOrder.toLocaleString()}</span>
+          <span className="salePrice">
+            R$ {priceWithDiscount.toLocaleString()}
+          </span>
         </div>
         <div>
           <span className="equivalentLabel">equivalente a</span>
         </div>
         <div style={{ marginTop: 8 }}>
           <span className="priceByPeriodLabel">
-            R$ <span className="priceByPeriodNumber">8,39</span>/mês*
+            R${" "}
+            <span className="priceByPeriodNumber">
+              {pricePerMonth.toLocaleString()}
+            </span>
+            /mês*
           </span>
         </div>
         <div>
@@ -46,9 +71,56 @@ function PlanCard(props) {
             variant="contained"
             color="primary"
             className={classes.buyNow}
+            href={
+              "?a=add&pid=" +
+              plan.id +
+              "&billingcycle=" +
+              paymentFrequency +
+              "&promocode=PROMOHG40"
+            }
+            style={buyNowStyle}
           >
             Contrate Agora
           </Button>
+        </div>
+        <div>
+          <div className="freeDomainText">
+            1 ano de Domínio Grátis <img src={info} alt="info" />
+          </div>
+          <div className="economyValue">
+            economize R$ {saving.toLocaleString()}
+            <Chip
+              label="40% OFF"
+              style={{
+                fontFamily: "Montserrat",
+                backgroundColor: "#51C99C",
+                color: "#ffffff",
+                fontWeight: "bold",
+                height: 23,
+                marginLeft: 5,
+              }}
+            ></Chip>
+          </div>
+        </div>
+      </div>
+      <div className="cardFooter">
+        <div>
+          <span className="dashed">{plan.details.siteNumbers}</span>
+        </div>
+        <div>
+          <span className="bold">{plan.details.storage} GB </span> de
+          Armazenamento{" "}
+        </div>
+        <div>
+          <span className="dashed">
+            Contas de E-mail <span className="bold">Ilimitadas</span>
+          </span>
+        </div>
+        <div>
+          Criador de Sites <span className="bold underline">Grátis</span>
+        </div>
+        <div>
+          Certificado SSL <span className="bold">Grátis</span> (https)
         </div>
       </div>
     </div>

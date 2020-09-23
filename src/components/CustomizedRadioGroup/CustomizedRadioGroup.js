@@ -71,8 +71,8 @@ function CustomizedRadioGroup(props) {
   const { selectedValue, handleChange } = props;
   return (
     <div>
+      <div className="radioGroupLabel">Quero pagar a cada:</div>
       <FormControl component="fieldset">
-        <FormLabel component="legend">Quero pagar a cada:</FormLabel>
         <RadioGroup
           defaultValue="female"
           aria-label="gender"

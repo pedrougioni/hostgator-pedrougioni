@@ -1,94 +1,78 @@
 import React, { useEffect, useState } from "react";
 import SwipeableViews from "react-swipeable-views";
 import PlanCard from "../PlanCard/PlanCard";
+import Loader from "../Loader/Loader";
+import IconButton from "@material-ui/core/IconButton";
+import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
+import ChevronRightIcon from "@material-ui/icons/ChevronRight";
+import "./PlansList.css";
 
 function PlansList(props) {
-  const pF = props.paymentFrequency;
-  useEffect(
-    () =>
-      fetch(
-        "https://6dd1804f-a914-4c99-a1ed-58adca2bca74.mock.pstmn.io/prices"
-      ).then((data) => data.json.then((json) => setPlanList(json))),
-    []
-  );
-  const [planList, setPlanList] = useState([]);
+  const [plans, setPlans] = useState([]);
   const [planIndex, setPlanIndex] = useState(0);
-  const plan5 = {
-    name: "Plano P",
-    id: 5,
-    cycle: {
-      monthly: {
-        priceRenew: "24.19",
-        priceOrder: "24.19",
-        months: 1,
-      },
-      semiannually: {
-        priceRenew: "128.34",
-        priceOrder: "128.34",
-        months: 6,
-      },
-      biennially: {
-        priceRenew: "393.36",
-        priceOrder: "393.36",
-        months: 24,
-      },
-      triennially: {
-        priceRenew: "561.13",
-        priceOrder: "561.13",
-        months: 36,
-      },
-      quarterly: {
-        priceRenew: "67.17",
-        priceOrder: "67.17",
-        months: 3,
-      },
-      annually: {
-        priceRenew: "220.66",
-        priceOrder: "220.66",
-        months: 12,
-      },
-    },
-  };
-  const plan6 = {
-    name: "dsfafasd",
-    id: 5,
-    cycle: {
-      monthly: {
-        priceRenew: "24.19",
-        priceOrder: "24.19",
-        months: 1,
-      },
-      semiannually: {
-        priceRenew: "128.34",
-        priceOrder: "128.34",
-        months: 6,
-      },
-      biennially: {
-        priceRenew: "393.36",
-        priceOrder: "393.36",
-        months: 24,
-      },
-      triennially: {
-        priceRenew: "561.13",
-        priceOrder: "561.13",
-        months: 36,
-      },
-      quarterly: {
-        priceRenew: "67.17",
-        priceOrder: "67.17",
-        months: 3,
-      },
-      annually: {
-        priceRenew: "220.66",
-        priceOrder: "220.66",
-        months: 12,
-      },
-    },
-  };
-  const plans = [0, 0, 0];
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const paymentFrequency = props.paymentFrequency;
+  const list = [];
+
+  useEffect(() => {
+    function handleResize() {
+      // Set window width/height to state
+      setWindowWidth(window.innerWidth);
+    }
+    window.addEventListener("resize", handleResize);
+    fetchData();
+  }, []);
+
+  function fetchData() {
+    fetch(
+      "https://6dd1804f-a914-4c99-a1ed-58adca2bca74.mock.pstmn.io/prices"
+    ).then((response) => response.json().then((json) => getMainPlans(json)));
+
+    function getMainPlans(json) {
+      const entries = Object.entries(json.shared.products);
+      const plansList = [];
+      entries.forEach((entry) => {
+        const plan = entry[1];
+        switch (plan.name) {
+          case "Plano P":
+            plan.details = { storage: 100, siteNumbers: "Para 1 site" };
+            plan.img = "planP";
+            plansList.push({ key: entry[0], plan: plan });
+            break;
+          case "Plano M":
+            plan.details = { storage: 100, siteNumbers: "Sites Ilimitados" };
+            plan.img = "planM";
+            plan.recomended = true;
+            plansList.push({ key: entry[0], plan: plan });
+            break;
+          case "Plano Turbo":
+            plan.details = { storage: 150, siteNumbers: "Sites Ilimitados" };
+            plan.img = "planTurbo";
+            plansList.push({ key: entry[0], plan: plan });
+            break;
+          default:
+        }
+      });
+      setPlans(plansList);
+      const middleIndex = Math.floor(plansList.length / 2);
+      setPlanIndex(middleIndex);
+    }
+
+    function getFullData(json) {
+      const entries = Object.entries(json.shared.products);
+      const plansList = [];
+      entries.forEach((entry) => {
+        plansList.push({ key: entry[0], plan: entry[1] });
+      });
+      setPlans(plansList);
+      const middleIndex = Math.floor(entries.length / 2);
+      setPlanIndex(middleIndex);
+    }
+  }
+
   function incrementIndex() {
     const newIndex = planIndex + 1;
-    if (newIndex >= plans.length) {
+    if (newIndex >= list.length) {
       setPlanIndex(0);
       return;
     }
@@ -98,30 +82,76 @@ function PlansList(props) {
   function decrementIndex() {
     const newIndex = planIndex - 1;
     if (newIndex < 0) {
-      setPlanIndex(plans.length - 1);
+      setPlanIndex(list.length - 1);
       return;
     }
     setPlanIndex(newIndex);
     return;
   }
-  const list = [
-    <PlanCard plan={plan5} />,
-    <PlanCard plan={plan6} />,
-    <PlanCard plan={plan5} />,
-  ];
-  const mobile = false;
+
+  if (plans.length === 0) {
+    list.length = 0;
+    list.push(
+      <div key="loading">
+        <Loader />
+      </div>
+    );
+  } else {
+    list.length = 0;
+    plans.forEach((row) =>
+      list.push(
+        <PlanCard
+          plan={row.plan}
+          key={row.key}
+          paymentFrequency={paymentFrequency}
+        />
+      )
+    );
+  }
+
+  const mobile = windowWidth < 1183;
   return (
     <div style={{ margin: 50 }}>
       {mobile ? (
-        <div>
-          <SwipeableViews index={planIndex} open={true}>
+        <div className="carouselContainer">
+          <SwipeableViews
+            containerStyle={{ width: 350, marginLeft: "35%" }}
+            index={planIndex}
+            open={true}
+          >
             {list}
           </SwipeableViews>
-          <button onClick={incrementIndex}>+</button>
-          <button onClick={decrementIndex}>-</button>
+          <div className="carouselButton left">
+            <IconButton
+              aria-label="down"
+              disableRipple={true}
+              size="medium"
+              style={{ backgroundColor: "transparent" }}
+              onClick={decrementIndex}
+            >
+              <ChevronLeftIcon
+                fontSize="inherit"
+                style={{ color: "#ffffff" }}
+              />
+            </IconButton>
+          </div>
+          <div className="carouselButton right">
+            <IconButton
+              aria-label="down"
+              disableRipple={true}
+              size="medium"
+              style={{ backgroundColor: "transparent" }}
+              onClick={incrementIndex}
+            >
+              <ChevronRightIcon
+                fontSize="inherit"
+                style={{ color: "#ffffff" }}
+              />
+            </IconButton>
+          </div>
         </div>
       ) : (
-        list
+        <div className="plansListDefault">{list}</div>
       )}
     </div>
   );
