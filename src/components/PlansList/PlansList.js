@@ -109,13 +109,23 @@ function PlansList(props) {
     );
   }
 
+  function getContainterStyleForCarousel() {
+    if (windowWidth > 1025) {
+      return { width: 350, marginLeft: "35%" };
+    } else if (windowWidth > 450) {
+      return { width: 350, marginLeft: "30%" };
+    } else {
+      return { width: "100%", marginLeft: 10 };
+    }
+  }
+
   const mobile = windowWidth < 1183;
   return (
-    <div style={{ margin: 50 }}>
+    <div className={"plansListContainer"}>
       {mobile ? (
         <div className="carouselContainer">
           <SwipeableViews
-            containerStyle={{ width: 350, marginLeft: "35%" }}
+            containerStyle={getContainterStyleForCarousel()}
             index={planIndex}
             open={true}
           >
@@ -125,7 +135,7 @@ function PlansList(props) {
             <IconButton
               aria-label="down"
               disableRipple={true}
-              size="medium"
+              size={"medium"}
               style={{ backgroundColor: "transparent" }}
               onClick={decrementIndex}
             >
@@ -153,6 +163,7 @@ function PlansList(props) {
       ) : (
         <div className="plansListDefault">{list}</div>
       )}
+      <div className="conditions">*Confira as condições da promoção</div>
     </div>
   );
 }

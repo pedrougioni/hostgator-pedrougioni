@@ -89,6 +89,7 @@ function App() {
               ></CheckIcon>
               <span>Suporte 24h, todos os dias</span>
             </span>
+            <br style={{ display: "none" }} />
             <span>
               <CheckIcon
                 style={{

@@ -24,6 +24,24 @@
   z-index: -3;
 }
 
+@media (max-width: 1630px) {
+  .content img {
+    height: 75%;
+  }
+}
+
+@media (max-width: 1480px) {
+  .content img {
+    height: 60%;
+  }
+}
+
+@media (max-width: 1200px) {
+  .content img {
+    display: none;
+  }
+}
+
 .title {
   font: normal normal 600 16px/27px Montserrat;
   letter-spacing: 1.6px;
@@ -104,4 +122,29 @@
   position: absolute;
   bottom: -52px;
   right: 3%;
+}
+
+@media (max-width: 800px) {
+  .content {
+    padding-top: 32px;
+  }
+
+  .description {
+    font: normal normal bold 24px/32px "Montserrat";
+    letter-spacing: 0px;
+    color: #ffffff;
+    opacity: 1;
+    padding-top: 12px;
+    margin: 0 15px;
+  }
+  .description br {
+    display: none;
+  }
+  .subItens {
+    margin: 0 40px;
+    margin-top: 12px;
+  }
+  .item {
+    margin-bottom: 8px;
+  }
 }

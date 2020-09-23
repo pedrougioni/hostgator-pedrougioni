@@ -111,3 +111,20 @@
   color: #1d5297;
   opacity: 1;
 }
+
+@media (max-width: 450px) {
+  .planCard {
+    width: 266px;
+    height: 650px;
+    background: #ffffff 0% 0% no-repeat padding-box;
+    border: 1px solid #dfecff;
+    border-radius: 4px;
+    text-align: center;
+    margin: 0 auto;
+    opacity: 1;
+  }
+
+  .pricesCard a.MuiButton-contained {
+    width: 240px;
+  }
+}

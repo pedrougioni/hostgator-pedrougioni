@@ -23,3 +23,33 @@
   flex: 1;
   margin: 0 auto;
 }
+
+.conditions {
+  text-decoration: underline;
+  font: normal normal normal 12px/12px Montserrat;
+  letter-spacing: 0px;
+  color: #4480c5;
+  opacity: 0.7;
+}
+.plansListContainer {
+  margin: 50px;
+}
+@media (max-width: 450px) {
+  .plansListContainer {
+    margin: 0px;
+    margin-top: 20px;
+  }
+  .carouselButton.left {
+    left: 0px;
+  }
+  .carouselButton.right {
+    right: 0px;
+  }
+}
+@media (min-width: 1200px) {
+  .conditions {
+    width: 1026px;
+    text-align: right;
+    margin: 0 auto;
+  }
+}
