@@ -115,7 +115,7 @@ function PlansList(props) {
     } else if (windowWidth > 450) {
       return { width: 350, marginLeft: "30%" };
     } else {
-      return { width: "100%", marginLeft: 10 };
+      return { width: "100%", marginLeft: 0 };
     }
   }
 
