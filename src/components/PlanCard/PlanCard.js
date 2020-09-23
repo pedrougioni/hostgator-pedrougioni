@@ -43,9 +43,10 @@ function PlanCard(props) {
     planCardClass += " recomended";
   }
   const { priceOrder, months } = plan.cycle[paymentFrequency];
-  const priceWithDiscount = Math.round(priceOrder * 0.6 * 100) / 100;
-  const pricePerMonth = Math.round((priceWithDiscount * 100) / months) / 100;
-  const saving = Math.round((priceOrder - priceWithDiscount) * 100) / 100;
+  const priceWithDiscount = (priceOrder * 0.6).toFixed(2);
+  const pricePerMonth = (priceWithDiscount / months).toFixed(2);
+  const saving = (priceOrder - priceWithDiscount).toFixed(2);
+
   return (
     <div className={planCardClass}>
       <div className="cardHeader">
